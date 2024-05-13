@@ -1,0 +1,7 @@
+.vscode/
+*env/
+*results_storage/
+
+*__pycache__/
+
+logs/
