@@ -82,14 +82,14 @@ async def report_wfo_stations(address):
     # result_storage=LocalFileSystem.load("results"),
     result_storage=S3.load("s3-storage"),
 )
-async def wfo_stations_main(addresses: list[str]):
+async def list_observation_stations(addresses: list[str]):
     parallel_subflows = [report_wfo_stations(address) for address in addresses]
     await asyncio.gather(*parallel_subflows)
 
 
 if __name__ == "__main__":
     asyncio.run(
-        wfo_stations_main(
+        list_observation_stations(
             [
                 "815 Pete Rose Way Cincinnati, OH 45202",
                 "777 California Ave Suite 150, Palo Alto, CA 94306",

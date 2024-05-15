@@ -18,7 +18,7 @@ Set-Location $SCRIPT_DIR
 Invoke-Expression ".\prefect-env\Scripts\Activate.ps1"
 
 # Force-correct API URL
-Invoke-Expression "prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api"
+# Invoke-Expression "prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api"
 
 # overwrite active deployments
 Invoke-Expression "python .\serve_deployments.py"

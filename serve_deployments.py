@@ -6,7 +6,7 @@ Date: 5/12/2024
 """
 
 from flows.weather_sentiment_flow import analyze_weather_data
-from flows.wfo_stations import wfo_stations_main
+from flows.wfo_stations import list_observation_stations
 
 from prefect import serve
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
             ],
         },
         cron="30 16 * * 1,3,5",
-        tags=["nws", "weather", "sawyer_point"],
+        tags=["level-basic", "weather", "sawyer_point"],
         description="Weather analysis for Sawyer Point",
         version="0.1.0",
     )
@@ -41,19 +41,19 @@ if __name__ == "__main__":
                 "Sunglasses not required",
             ],
         },
-        cron="30 6,13,17 * * *",
-        tags=["nws", "weather", "palo_alto"],
+        cron="0 * * * *",
+        tags=["level-basic", "weather", "palo_alto"],
         description="Weather analysis for Palo Alto",
         version="0.1.0",
     )
 
-    wfo_stations_both = wfo_stations_main.to_deployment(
+    wfo_stations_both = list_observation_stations.to_deployment(
         name="weather_office_stations",
         parameters={
             "addresses": [SP_ADDR, PA_ADDR],
         },
         cron="0 7 * * *",
-        tags=["nws", "weather", "stations", "advanced"],
+        tags=["weather", "stations", "level-advanced"],
         description="Observation stations for given addresses",
         version="0.1.0",
     )
